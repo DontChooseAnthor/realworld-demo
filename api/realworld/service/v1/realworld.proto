@@ -1,0 +1,96 @@
+syntax = "proto3";
+
+package api.user.service.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "realworld/api/user/service/v1;v1";
+
+service RealWorld {
+	rpc Login(LoginRequest) returns (LoginReply){
+		option (google.api.http) = {
+			post: "/api/users/login",
+			body: "*"
+		};
+	}
+	rpc Register(RegisterRequest) returns (RegisterReply){
+		option (google.api.http) = {
+			post: "/api/users",
+			body: "*"
+		};
+	}
+
+	rpc GetCurrentUser(GetCurrentUserRequest) returns (GetCurrentUserReply) {}
+	rpc UpdateUser(UpdateUserRequest) returns (UpdateUserReply) {}
+
+	// articles
+	rpc GetArticlesList(GetArticlesListRequest) returns (GetArticlesListReply) {}
+	rpc GetArticle(GetArticleRequest) returns (GetArticleReply) {}
+	rpc CreateArticle(CreateArticleRequest) returns (CreateArticleReply) {}
+	rpc UpdateArticle(UpdateArticleRequest) returns (UpdateArticleReply) {}
+	rpc DeleteArticle(DeleteArticleRequest) returns (DeleteArticleReply) {}
+	// articles:comments
+	rpc AddComments(AddCommentsRequest) returns (AddCommentsReply) {}
+	rpc GetComments(GetCommentsRequest) returns (GetCommentsReply) {}
+	rpc UpdateComments(UpdateCommentsRequest) returns (UpdateCommentsReply) {}
+	rpc DeleteComments(DeleteCommentsRequest) returns (DeleteCommentsReply) {}
+
+}
+
+message	User {
+	uint32 id = 1;
+	string username = 2;
+	string password = 3;
+	uint32 level = 4;
+    string bio = 5;
+    string image = 6;
+    google.protobuf.Timestamp created_at = 7;
+    uint32 points = 8;
+}
+
+message LoginRequest {
+	message User {
+		string username = 1;
+		string password = 2;
+	}
+	repeated User user = 1;
+}
+
+message LoginReply {
+	message User {
+    	uint32 id = 1;
+    	string username = 2;
+    	string password = 3;
+    	uint32 level = 4;
+        string bio = 5;
+        string image = 6;
+        google.protobuf.Timestamp created_at = 7;
+        uint32 points = 8;
+	}
+	repeated User user = 1;
+	string token = 2;
+}
+
+message RegisterRequest {
+	message User {
+		string username = 1;
+		string password = 2;
+	}
+	User user = 1;
+}
+
+message RegisterReply {
+	message User {
+    	uint32 id = 1;
+    	string username = 2;
+    	string password = 3;
+    	uint32 level = 4;
+        string bio = 5;
+        string image = 6;
+        google.protobuf.Timestamp created_at = 7;
+        uint32 points = 8;
+	}
+	User user = 1;
+	string token = 2;
+}
+

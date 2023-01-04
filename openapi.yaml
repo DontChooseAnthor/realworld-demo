@@ -1,0 +1,110 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: RealWorld API
+    version: 0.0.1
+paths:
+    /api/users:
+        post:
+            tags:
+                - RealWorld
+            operationId: RealWorld_Register
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.RegisterRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.RegisterReply'
+    /api/users/login:
+        post:
+            tags:
+                - RealWorld
+            operationId: RealWorld_Login
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.user.service.v1.LoginRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.user.service.v1.LoginReply'
+components:
+    schemas:
+        api.user.service.v1.LoginReply:
+            type: object
+            properties:
+                user:
+                    $ref: '#/components/schemas/api.user.service.v1.LoginReply_User'
+                token:
+                    type: string
+        api.user.service.v1.LoginReply_User:
+            type: object
+            properties:
+                email:
+                    type: string
+                username:
+                    type: string
+                bio:
+                    type: string
+                image:
+                    type: string
+        api.user.service.v1.LoginRequest:
+            type: object
+            properties:
+                user:
+                    $ref: '#/components/schemas/api.user.service.v1.LoginRequest_User'
+        api.user.service.v1.LoginRequest_User:
+            type: object
+            properties:
+                email:
+                    type: string
+                password:
+                    type: string
+        api.user.service.v1.RegisterReply:
+            type: object
+            properties:
+                user:
+                    $ref: '#/components/schemas/api.user.service.v1.RegisterReply_User'
+                token:
+                    type: string
+        api.user.service.v1.RegisterReply_User:
+            type: object
+            properties:
+                email:
+                    type: string
+                username:
+                    type: string
+                bio:
+                    type: string
+                image:
+                    type: string
+        api.user.service.v1.RegisterRequest:
+            type: object
+            properties:
+                user:
+                    $ref: '#/components/schemas/api.user.service.v1.RegisterRequest_User'
+        api.user.service.v1.RegisterRequest_User:
+            type: object
+            properties:
+                email:
+                    type: string
+                password:
+                    type: string
+                username:
+                    type: string
+tags:
+    - name: RealWorld
